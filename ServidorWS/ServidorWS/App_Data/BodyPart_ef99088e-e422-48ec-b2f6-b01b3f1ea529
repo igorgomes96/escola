@@ -1,0 +1,37 @@
+<AlunoList>
+	<Aluno>
+		<CPFAluno>11122211122</CPFAluno>
+		<NomeAluno>Fernando Souza</NomeAluno>
+		<DataNascimento>2000-09-03</DataNascimento>
+		<NomeMae>Maria de Fátima</NomeMae>
+		<Endereco>Rua 1, nº 111, Bairro A, Uberlândia - MG</Endereco>
+	</Aluno>
+	<Aluno>
+		<CPFAluno>22211122211</CPFAluno>
+		<NomeAluno>Lara Santos</NomeAluno>
+		<DataNascimento>1999-02-02</DataNascimento>
+		<NomeMae>Sara Silva</NomeMae>
+		<Endereco>Rua 2, nº 222, Bairro B, Uberlândia - MG</Endereco>
+	</Aluno>
+	<Aluno>
+		<CPFAluno>33333333333</CPFAluno>
+		<NomeAluno>João Henrique</NomeAluno>
+		<DataNascimento>1998-04-18</DataNascimento>
+		<NomeMae>Maria Antônia</NomeMae>
+		<Endereco>Rua 3, nº 333, Bairro C, Araguari - MG</Endereco>
+	</Aluno>
+	<Aluno>
+		<CPFAluno>44444444444</CPFAluno>
+		<NomeAluno>Paulo Eduardo</NomeAluno>
+		<DataNascimento>2001-07-03</DataNascimento>
+		<NomeMae>Cristina Santos</NomeMae>
+		<Endereco>Rua 4, nº 444, Bairro D, Uberaba - MG</Endereco>
+	</Aluno>
+	<Aluno>
+		<CPFAluno>55555555555</CPFAluno>
+		<NomeAluno>Vitor Magalhães</NomeAluno>
+		<DataNascimento></DataNascimento>
+		<NomeMae>Maria Antônia</NomeMae>
+		<Endereco>Rua 5, nº 555, Bairro E, Uberaba - MG</Endereco>
+	</Aluno>
+</AlunoList>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="1" author="igorago">
+		<createTable tableName="Aluno">
+			<column name="CPFAluno" type="varchar(11)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="NomeAluno" type="varchar(60)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DataNascimento" type="date">
+				<constraints nullable="false"/>
+			</column>
+			<column name="NomeMae" type="varchar(60)"/>
+			<column name="Endereco" type="varchar(100)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="2" author="igorago">
+		<createTable tableName="Importacao">
+			<column name="Id" type="int" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="DataHora" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column name="NomeArquivo" type="varchar(100)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+</databaseChangeLog>

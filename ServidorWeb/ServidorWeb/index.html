@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Escola</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Loader.css -->
+    <link rel="stylesheet" href="lib/loader.css/loaders.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body ng-app="escolaApp">
+    <div id="wrapper">
+        <div ui-view></div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Angular -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+
+    <!-- JavaScript Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- App -->
+    <script src="js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/importacaoCtrl.js"></script>
+    <script src="js/controllers/listagemCtrl.js"></script>
+
+    <!-- Services -->
+    <script src="js/services/alunosAPI.js"></script>
+    <script src="js/services/importacoesAPI.js"></script>
+    <script src="js/services/messagesService.js"></script>
+    <script src="js/services/uploadFileService.js"></script>
+
+    <!-- Config -->
+    <script src="js/config/routeConfig.js"></script>
+    <script src="js/config/interceptorConfig.js"></script>
+
+    <!-- Values -->
+    <script src="js/values/configValue.js"></script>
+
+    <!-- Interceptors -->
+    <script src="js/interceptors/errorInterceptor.js"></script>
+
+</body>
+</html>

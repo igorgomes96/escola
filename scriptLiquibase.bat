@@ -1,0 +1,1 @@
+liquibase --driver=com.microsoft.sqlserver.jdbc.SQLServerDriver --classpath="C:\Program Files (x86)\Microsoft JDBC Driver 6.0 for SQL Server\sqljdbc_6.0\enu\jre8\sqljdbc42.jar" --url="jdbc:sqlserver://localhost:1433;databaseName=Escola;integratedSecurity=true;" --changeLogFile="changelog.xml" migrate
