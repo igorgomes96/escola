@@ -124,8 +124,8 @@
     <Compile Include="Controllers\AlunosController.cs" />
     <Compile Include="Controllers\ImportacoesController.cs" />
     <Compile Include="Exceptions\AlunoImportacaoException.cs" />
+    <Compile Include="Exceptions\CPFFormatoIncorretoException.cs" />
     <Compile Include="Exceptions\EnderecoNaoInformadoException .cs" />
-    <Compile Include="Exceptions\DataNascimentoNaoInformadoException.cs" />
     <Compile Include="Exceptions\CPFNaoInformadoException.cs" />
     <Compile Include="Exceptions\NomeNaoInformadoException.cs" />
     <Compile Include="Global.asax.cs">

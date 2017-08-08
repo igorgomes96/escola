@@ -12,10 +12,5 @@ namespace ServidorWS.Exceptions
         {
             IndexAluno = indexAluno;
         }
-
-        public AlunoImportacaoException(int indexAluno, string mensagem) : base(mensagem)
-        {
-            IndexAluno = indexAluno;
-        }
     }
 }

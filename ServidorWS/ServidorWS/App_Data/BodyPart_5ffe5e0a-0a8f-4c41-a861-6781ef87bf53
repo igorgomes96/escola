@@ -9,7 +9,7 @@
 	<Aluno>
 		<CPFAluno>22211122211</CPFAluno>
 		<NomeAluno>Lara Santos</NomeAluno>
-		<DataNascimento>1999-10-05</DataNascimento>
+		<DataNascimento></DataNascimento>
 		<NomeMae>Sara Santos</NomeMae>
 		<Endereco>Rua 2, nº 222, Bairro B, Uberlândia - MG</Endereco>
 	</Aluno>

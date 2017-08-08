@@ -5,13 +5,12 @@ using System.Web;
 
 namespace ServidorWS.Exceptions
 {
-    public class NomeNaoInformadoException : AlunoImportacaoException
+    public class CPFFormatoIncorretoException : AlunoImportacaoException
     {
         public string CPF { get; set; }
-        public NomeNaoInformadoException(int indexAluno, string CPF) : base(indexAluno)
+        public CPFFormatoIncorretoException(int indexAluno, string CPF) : base(indexAluno)
         {
             this.CPF = CPF;
         }
-
     }
 }

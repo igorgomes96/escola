@@ -43,7 +43,7 @@ namespace ServidorWS.Controllers
                     // Verifica a integridade das informações e salva os dados no banco
                     SaveAlunos(alunosList);
 
-                    // Adiciona um registro de log na tabela de Importacao
+                    // Adiciona um registro na tabela de Importacao, para histórico de importações
                     db.Importacao.Add(new Importacao
                     {
                         DataHora = DateTime.Now,
@@ -54,13 +54,37 @@ namespace ServidorWS.Controllers
                     db.SaveChanges();
 
                 }
+                catch (CPFNaoInformadoException e)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "CPF não informado para o " + e.IndexAluno + "º aluno da base!");
+                }
+                catch (CPFFormatoIncorretoException e)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "O CPF deve ter 11 caracteres! (" + e.IndexAluno + "º aluno da base, CPF informado: " + e.CPF + ")");
+                }
+                catch (NomeNaoInformadoException e)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Nome não informado! (" + e.IndexAluno + "º aluno da base, CPF informado: " + e.CPF + ")");
+                }
+                catch (EnderecoNaoInformadoException e)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Endereço não informado! (" + e.IndexAluno + "º aluno da base, CPF informado: " + e.CPF + ")");
+                }
+                catch (InvalidOperationException e)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e.Message + ' ' + e.InnerException.Message);
+                }
                 catch (Exception e)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
                 }
                 finally
                 {
-                    File.Delete(file.LocalFileName);
+                    try
+                    {
+                        File.Delete(file.LocalFileName);
+                    } catch (Exception) { }
+                    
                 }
             }
 
@@ -71,8 +95,17 @@ namespace ServidorWS.Controllers
         {
             XmlSerializer serializer = new XmlSerializer(typeof(AlunoListXML));
             FileStream fileStream = new FileStream(fileName, FileMode.Open);
-            AlunoListXML alunosList = (AlunoListXML)serializer.Deserialize(fileStream);
-            fileStream.Close();
+            AlunoListXML alunosList;
+            try
+            {
+                alunosList = (AlunoListXML)serializer.Deserialize(fileStream);
+            } catch (Exception e) {
+                throw e;
+            } finally
+            {
+                fileStream.Close();
+            }
+            
             return alunosList;
         }
 
@@ -81,9 +114,11 @@ namespace ServidorWS.Controllers
             int index = 1;
             alunosList.Alunos.ForEach(aluno => {
 
+                aluno.CPFAluno = aluno.CPFAluno.Trim();
                 if (aluno.CPFAluno == "") throw new CPFNaoInformadoException(index);
-                if (aluno.NomeAluno == "") throw new NomeNaoInformadoException(index);
-                if (aluno.Endereco == "") throw new EnderecoNaoInformadoException(index);
+                if (aluno.CPFAluno.Length != 11) throw new CPFFormatoIncorretoException(index, aluno.CPFAluno);
+                if (aluno.NomeAluno == "") throw new NomeNaoInformadoException(index, aluno.CPFAluno);
+                if (aluno.Endereco == "") throw new EnderecoNaoInformadoException(index, aluno.CPFAluno);
 
                 Aluno alunoModel = aluno.GetAlunoModel();
 

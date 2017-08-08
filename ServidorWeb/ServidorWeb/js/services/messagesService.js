@@ -18,7 +18,7 @@ angular.module('escolaApp').service('messagesService', ['$timeout', function($ti
 
 		$timeout(function() {
 			$('.mensagem-error').fadeOut('slow');
-		}, 6000);
+		}, 11000);
 	}
 
 	self.exibeMensagemSucesso = function(mensagem, titulo) {
