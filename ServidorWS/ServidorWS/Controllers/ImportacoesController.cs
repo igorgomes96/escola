@@ -1,5 +1,6 @@
 ﻿using ServidorWS.Exceptions;
 using ServidorWS.Models;
+using ServidorWS.Services;
 using ServidorWS.XML;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,12 @@ namespace ServidorWS.Controllers
     public class ImportacoesController : ApiController
     {
         private Contexto db = new Contexto();
+        private readonly IImportacaoService _importacaoService;
+
+        public ImportacoesController(IImportacaoService importacaoService)
+        {
+            _importacaoService = importacaoService ?? throw new ArgumentNullException(nameof(importacaoService));
+        }
 
         [HttpPost]
         [Route("api/Importacoes/Upload")]
@@ -38,8 +45,10 @@ namespace ServidorWS.Controllers
             {
                 try
                 {
+                    /*
                     // Lê o arquivo xml, fazendo o parse e adicionando cada um a alunosList
                     AlunoListXML alunosList = ReadFile(file.LocalFileName);
+
                     // Verifica a integridade das informações e salva os dados no banco
                     SaveAlunos(alunosList);
 
@@ -52,6 +61,9 @@ namespace ServidorWS.Controllers
 
                     // Salva as alterações no banco
                     db.SaveChanges();
+                    */
+
+                    _importacaoService.Importar(file.LocalFileName);
 
                 }
                 catch (CPFNaoInformadoException e)

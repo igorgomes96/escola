@@ -23,6 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -124,6 +125,7 @@
     <Compile Include="Controllers\AlunosController.cs" />
     <Compile Include="Controllers\ImportacoesController.cs" />
     <Compile Include="Exceptions\AlunoImportacaoException.cs" />
+    <Compile Include="Exceptions\AlunoNaoEncontradoException.cs" />
     <Compile Include="Exceptions\CPFFormatoIncorretoException.cs" />
     <Compile Include="Exceptions\EnderecoNaoInformadoException .cs" />
     <Compile Include="Exceptions\CPFNaoInformadoException.cs" />
@@ -153,6 +155,11 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AlunosRepository.cs" />
+    <Compile Include="Repository\IAlunosRepository.cs" />
+    <Compile Include="Services\AlunosService.cs" />
+    <Compile Include="Services\IAlunosService.cs" />
+    <Compile Include="Services\IImportacaoService.cs" />
     <Compile Include="XML\AlunosListXML.cs" />
     <Compile Include="XML\AlunoXML.cs" />
   </ItemGroup>

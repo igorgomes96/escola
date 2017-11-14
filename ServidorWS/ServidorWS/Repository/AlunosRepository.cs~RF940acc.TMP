@@ -1,0 +1,15 @@
+﻿using ServidorWS.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ServidorWS.Repository
+{
+    public interface AlunosRepository
+    {
+        Aluno Save(Aluno aluno);
+        Aluno Delete(string CPF);
+    }
+}
