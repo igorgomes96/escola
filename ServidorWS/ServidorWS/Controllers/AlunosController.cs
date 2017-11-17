@@ -25,7 +25,7 @@ namespace ServidorWS.Controllers
         /// <param name="alunosService">Service enviado pelo Unity na inicialização do server.</param>
         public AlunosController(IAlunosService alunosService)
         {
-            _alunosService = alunosService ?? throw new ArgumentNullException(nameof(alunosService));
+            _alunosService = alunosService; //?? throw new ArgumentNullException(nameof(alunosService));
         }
 
         /// <summary>
@@ -38,18 +38,36 @@ namespace ServidorWS.Controllers
         }
 
         /// <summary>
+        /// Salva um aluno
+        /// </summary>
+        /// <param name="aluno"></param>
+        /// <returns>Aluno salvo</returns>
+        [ResponseType(typeof(Aluno))]
+        public IHttpActionResult PostAluno(Aluno aluno)
+        {
+            try
+            {
+                _alunosService.Save(aluno);
+                return Ok(aluno);
+            } catch(Exception e)
+            {
+                return Content(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
+        /// <summary>
         /// Exclui o aluno pelo CPF
         /// </summary>
         /// <param name="cpf">CPF do aluno a ser excluído.</param>
         /// <returns>Aluno excluído</returns>
         [ResponseType(typeof(Aluno))]
-        [Route("{cpf}")]
+        [Route("api/Alunos/{cpf}")]
         public IHttpActionResult DeleteAluno(string cpf)
         {
             try
             {
                 return Ok(_alunosService.Delete(cpf));
-            } catch (AlunoNaoEncontradoException e)
+            } catch (EntidadeNaoEncontradaException<string, Aluno> e)
             {
                 return Content(HttpStatusCode.NotFound, e.Message);
             }

@@ -16,6 +16,7 @@ namespace ServidorWS
         {
             // Código que é executado na inicialização do aplicativo
             AreaRegistration.RegisterAllAreas();
+            UnityConfig.RegisterComponents();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);            
         }

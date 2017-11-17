@@ -1,4 +1,5 @@
-﻿using ServidorWS.Exceptions;
+﻿using ServidorWS.Dto;
+using ServidorWS.Exceptions;
 using ServidorWS.Models;
 using ServidorWS.Services;
 using ServidorWS.XML;
@@ -11,18 +12,44 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Xml.Serialization;
 
 namespace ServidorWS.Controllers
 {
     public class ImportacoesController : ApiController
     {
-        private Contexto db = new Contexto();
         private readonly IImportacaoService _importacaoService;
 
         public ImportacoesController(IImportacaoService importacaoService)
         {
-            _importacaoService = importacaoService ?? throw new ArgumentNullException(nameof(importacaoService));
+            _importacaoService = importacaoService; //?? throw new ArgumentNullException(nameof(importacaoService));
+        }
+
+        [ResponseType(typeof(IEnumerable<ImportacaoDto>))]
+        public IHttpActionResult GetAll()
+        {
+            try { 
+                return Ok(_importacaoService.ListAll());
+            } catch (Exception e)
+            {
+                return Content(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
+        [ResponseType(typeof(ImportacaoDto))]
+        public IHttpActionResult Delete(int id)
+        {
+            try
+            {
+                return Ok(_importacaoService.Delete(id));
+            } catch (EntidadeNaoEncontradaException<int, Importacao> e)
+            {
+                return Content(HttpStatusCode.NotFound, e.Message);
+            } catch (Exception e)
+            {
+                return Content(HttpStatusCode.InternalServerError, e.Message);
+            }
         }
 
         [HttpPost]
@@ -40,31 +67,15 @@ namespace ServidorWS.Controllers
             // Lê o arquivo da requisição assincronamente
             await Request.Content.ReadAsMultipartAsync(provider);
 
+            ICollection<Aluno> alunos = null;
+
             // Para cada arquivo enviado
             foreach (MultipartFileData file in provider.FileData)
             {
                 try
                 {
-                    /*
-                    // Lê o arquivo xml, fazendo o parse e adicionando cada um a alunosList
-                    AlunoListXML alunosList = ReadFile(file.LocalFileName);
-
-                    // Verifica a integridade das informações e salva os dados no banco
-                    SaveAlunos(alunosList);
-
-                    // Adiciona um registro na tabela de Importacao, para histórico de importações
-                    db.Importacao.Add(new Importacao
-                    {
-                        DataHora = DateTime.Now,
-                        NomeArquivo = file.Headers.ContentDisposition.FileName.Replace("\"", ""),
-                    });
-
-                    // Salva as alterações no banco
-                    db.SaveChanges();
-                    */
-
-                    _importacaoService.Importar(file.LocalFileName);
-
+                    //Importa o arquivo
+                    alunos = _importacaoService.Importar(file.LocalFileName);
                 }
                 catch (CPFNaoInformadoException e)
                 {
@@ -90,63 +101,10 @@ namespace ServidorWS.Controllers
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
                 }
-                finally
-                {
-                    try
-                    {
-                        File.Delete(file.LocalFileName);
-                    } catch (Exception) { }
-                    
-                }
             }
-
-            return Request.CreateResponse(HttpStatusCode.OK, "Dados importados com sucesso!");
+            return Request.CreateResponse(HttpStatusCode.OK, alunos);
         }
 
-        private AlunoListXML ReadFile(string fileName)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(AlunoListXML));
-            FileStream fileStream = new FileStream(fileName, FileMode.Open);
-            AlunoListXML alunosList;
-            try
-            {
-                alunosList = (AlunoListXML)serializer.Deserialize(fileStream);
-            } catch (Exception e) {
-                throw e;
-            } finally
-            {
-                fileStream.Close();
-            }
-            
-            return alunosList;
-        }
-
-        private void SaveAlunos(AlunoListXML alunosList)
-        {
-            int index = 1;
-            alunosList.Alunos.ForEach(aluno => {
-
-                aluno.CPFAluno = aluno.CPFAluno.Trim();
-                if (aluno.CPFAluno == "") throw new CPFNaoInformadoException(index);
-                if (aluno.CPFAluno.Length != 11) throw new CPFFormatoIncorretoException(index, aluno.CPFAluno);
-                if (aluno.NomeAluno == "") throw new NomeNaoInformadoException(index, aluno.CPFAluno);
-                if (aluno.Endereco == "") throw new EnderecoNaoInformadoException(index, aluno.CPFAluno);
-
-                Aluno alunoModel = aluno.GetAlunoModel();
-
-                if (AlunoExists(alunoModel.CPFAluno))
-                    db.Entry(alunoModel).State = System.Data.Entity.EntityState.Modified;
-                else
-                    db.Entry(alunoModel).State = System.Data.Entity.EntityState.Added;
-
-                index++;
-            });
-        }
-
-        private bool AlunoExists(string cpf)
-        {
-            return db.Aluno.Where(x => x.CPFAluno == cpf).Count() > 0;
-        }
 
     }
 }

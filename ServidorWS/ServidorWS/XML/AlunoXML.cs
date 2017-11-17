@@ -11,14 +11,6 @@ namespace ServidorWS.XML
     public class AlunoXML
     {
         public AlunoXML() { }
-        public AlunoXML(Aluno aluno)
-        {
-            CPFAluno = aluno.CPFAluno;
-            NomeAluno = aluno.NomeAluno;
-            DataNascimento = aluno.DataNascimento;
-            NomeMae = aluno.NomeMae;
-            Endereco = aluno.Endereco;
-        }
 
         [XmlElement]
         public string CPFAluno { get; set; }
@@ -31,16 +23,5 @@ namespace ServidorWS.XML
         [XmlElement]
         public string Endereco { get; set; }
 
-        public Aluno GetAlunoModel()
-        {
-            return new Aluno
-            {
-                CPFAluno = CPFAluno,
-                NomeAluno = NomeAluno,
-                DataNascimento = DataNascimento,
-                NomeMae = NomeMae,
-                Endereco = Endereco
-            };
-        }
     }
 }

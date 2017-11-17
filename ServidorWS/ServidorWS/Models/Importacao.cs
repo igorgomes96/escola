@@ -17,5 +17,6 @@ namespace ServidorWS.Models
         public int Id { get; set; }
         public System.DateTime DataHora { get; set; }
         public string NomeArquivo { get; set; }
+        public byte[] Arquivo { get; set; }
     }
 }

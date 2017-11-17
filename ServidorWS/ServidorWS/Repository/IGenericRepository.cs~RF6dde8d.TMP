@@ -1,0 +1,58 @@
+﻿using ServidorWS.Models;
+using ServidorWS.Exceptions;
+using System.Collections.Generic;
+using System;
+
+namespace ServidorWS.Repository
+{
+    public interface IGenericRepository<TKye, TEntity> where TEntity : class
+    {
+        /// <summary>
+        /// Lista todas as entidades
+        /// </summary>
+        /// <returns>Coleção com todos as entidades</returns>
+        ICollection<TEntity> ListAll();
+
+        /// <summary>
+        /// Faz uma consulta no banco
+        /// </summary>
+        /// <param name="predicate">Query</param>
+        /// <returns>Coleção com todos as entidades retornadas pela consulta</returns>
+        ICollection<TEntity> Query(Func<TEntity, bool> predicate);
+
+        /// <summary>
+        /// Busca uma entidade pela chave
+        /// </summary>
+        /// <param name="chave">Chave</param>
+        /// <returns>Entidade</returns>
+        /// <exception cref="EntidadeNaoEncontradaException{TEntity}">Registro não encontrado</exception>
+        TEntity Find(TKye key);
+
+        /// <summary>
+        /// Insere ou atualiza uma entidade
+        /// </summary>
+        /// <param name="entity">Entidade a ser salva</param>
+        void Save(TEntity entity);
+
+        /// <summary>
+        /// Insere ou atualiza todos os alunos.
+        /// </summary>
+        /// <param name="alunos">Alunos a serem salvos</param>
+        void SaveAll(ICollection<TEntity> entities);
+
+        /// <summary>
+        /// Exclui o aluno do banco.
+        /// </summary>
+        /// <param name="cpf">CPF do aluno a ser excluído</param>
+        /// <returns>Aluno excluído</returns>
+        /// <exception cref="EntidadeNaoEncontradaException">Não foi encontrado nenhum aluno com o CPF informado</exception>
+        TEntity Delete(TKye cpf);
+
+        /// <summary>
+        /// Verifica se já existe o aluno cadastrado no banco.
+        /// </summary>
+        /// <param name="cpf">CPF do aluno</param>
+        /// <returns>true, se existe; false, se não existe</returns>
+        bool Existe(TKye cpf);
+    }
+}

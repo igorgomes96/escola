@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item" ng-repeat="o in ctContainer.menu.opcoes">
+        <a class="nav-link" ui-sref="{{o.state}}" ng-class="{'active': o.active}">{{o.texto}}</a>
+    </li>
+</ul>
+
+<div class="tab-content" style="padding-top: 20px;">
+    <div class="container-fluid">
+        <div ui-view></div>
+    </div>
+</div>

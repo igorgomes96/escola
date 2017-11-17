@@ -1,8 +1,38 @@
-#btn-collapse-menu {
-	margin-top: 8px;
-	position: absolute;
-	margin-left: 5px;
-	background-color: #f8f8f8;
+body {
+    font-size: .9rem;
+}
+
+nav.navbar a {
+    font-size: 1.7rem;
+    color: rgb(12, 68, 112) !important;
+}
+
+.bg-light {
+    background-color: #e9ecef !important;
+}
+
+.navbar-brand img {
+    height: 50px;
+    /*filter: brightness(0);*/
+}
+
+.btn-xs {
+    padding: .2rem .5rem;
+    font-size: .85rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+
+.main-container {
+    padding-top: 10px;
+}
+
+.table th {
+    border-top: 0;
+}
+
+.table tr[ng-click] {
+    cursor: pointer;
 }
 
 .loader {
@@ -33,34 +63,10 @@ input[type="file"] {
     margin-bottom: 0;
 }
 
-.mensagem-success {
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    background-color: rgba(35, 202, 33, 0.8);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 10px;
-    z-index: 3;
-    box-shadow: 2px 2px 11px 0px rgba(0,0,0,0.5);
-    display: none;
-    max-width: 350px;
-}
-
-.mensagem-error {
-    position: fixed;
-    top: 60px;
-    right: 20px;
-    background-color: rgba(230, 71, 71, 0.8);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 10px;
-    z-index: 3;
-    box-shadow: 2px 2px 11px 0px rgba(0,0,0,0.5);
-    display: none;
-    max-width: 350px;
-}
-
 h4.modal-title {
     font-size: 24px;
+}
+
+.title {
+    margin-bottom: 15px;
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using ServidorWS.Exceptions;
+using ServidorWS.Dto;
 
 namespace ServidorWS.Services
 {
@@ -18,5 +19,22 @@ namespace ServidorWS.Services
         /// <exception cref="EnderecoNaoInformadoException">Endereço do aluno não informado.</exception>
         /// <exception cref="InvalidOperationException">Erro ao ler o arquivo.</exception>
         ICollection<Aluno> Importar(string fileName);
+
+        /// <summary>
+        /// Lista o histórico de importações.
+        /// </summary>
+        /// <returns>Lista de importações</returns>
+        ICollection<ImportacaoDto> ListAll();
+
+        /// <summary>
+        /// Deleta um registro de importação pelo código.
+        /// </summary>
+        /// <param name="codigo"></param>
+        /// <returns>Importação deletada</returns>
+        /// <exception cref="EntidadeNaoEncontradaException{int, Importacao}">Código não encontrado</exception>
+        ImportacaoDto Delete(int codigo);
+
+
+        
     }
 }

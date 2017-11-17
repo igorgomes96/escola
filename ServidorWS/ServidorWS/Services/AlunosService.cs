@@ -9,7 +9,13 @@ namespace ServidorWS.Services
 {
     public class AlunosService : IAlunosService
     {
-        private readonly IAlunosRepository _repository;
+        private readonly IGenericRepository<string, Aluno> _repository;
+
+        public AlunosService(IGenericRepository<string, Aluno> alunosRepository)
+        {
+            _repository = alunosRepository;
+        }
+
 
         public Aluno Delete(string cpf)
         {
@@ -34,6 +40,11 @@ namespace ServidorWS.Services
         public void Save(Aluno aluno)
         {
             _repository.Save(aluno);
+        }
+
+        public void SaveAll(ICollection<Aluno> alunos)
+        {
+            _repository.SaveAll(alunos);
         }
     }
 }

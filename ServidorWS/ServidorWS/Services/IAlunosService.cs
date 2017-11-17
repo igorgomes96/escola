@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServidorWS.Exceptions;
 
 namespace ServidorWS.Services
 {
@@ -21,7 +22,7 @@ namespace ServidorWS.Services
         /// </summary>
         /// <param name="cpf">CPF do aluno procurado</param>
         /// <returns>Objeto Aluno</returns>
-        /// <exception cref="AlunoNaoEncontradoException">Não foi encontrado nenhum aluno com o CPF informado.</exception>
+        /// <exception cref="EntidadeNaoEncontradaException{string, Aluno}">Não foi encontrado nenhum aluno com o CPF informado.</exception>
         Aluno Find(string cpf);
 
         /// <summary>
@@ -31,11 +32,17 @@ namespace ServidorWS.Services
         void Save(Aluno aluno);
 
         /// <summary>
+        /// Salva uma lista de alunos
+        /// </summary>
+        /// <param name="alunos"></param>
+        void SaveAll(ICollection<Aluno> alunos);
+
+        /// <summary>
         /// Exclui o aluno.
         /// </summary>
         /// <param name="cpf">CPF do aluno a ser excluído</param>
         /// <returns>Aluno excluído</returns>
-        /// <exception cref="AlunoNaoEncontradoException">Não foi encontrado nenhum aluno com o CPF informado</exception>
+        /// <exception cref="EntidadeNaoEncontradaException{string, Aluno}">Não foi encontrado nenhum aluno com o CPF informado</exception>
         Aluno Delete(string cpf);
 
         /// <summary>

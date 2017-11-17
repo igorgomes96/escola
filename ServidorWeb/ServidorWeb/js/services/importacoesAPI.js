@@ -22,7 +22,12 @@ angular.module('escolaApp').service('importacoesAPI', ['$http', 'config', functi
 		return $.ajax(settings);
     }
 
-    self.getImportacoes = function(statusCod) {
+    self.getImportacoes = function() {
         return $http.get(config.baseUrl + resource);
     }
+
+    self.deleteImportacao = function(codigo) {
+    	return $http.delete(config.baseUrl + resource + '/' + codigo);
+    }
+
 }]);
