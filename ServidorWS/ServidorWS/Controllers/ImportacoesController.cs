@@ -1,6 +1,7 @@
 ﻿using ServidorWS.Dto;
 using ServidorWS.Exceptions;
 using ServidorWS.Models;
+using ServidorWS.Resources;
 using ServidorWS.Services;
 using ServidorWS.XML;
 using System;
@@ -79,19 +80,19 @@ namespace ServidorWS.Controllers
                 }
                 catch (CPFNaoInformadoException e)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "CPF não informado para o " + e.IndexAluno + "º aluno da base!");
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Format(MessagesResource.CPFNaoInformado, e.IndexAluno));
                 }
                 catch (CPFFormatoIncorretoException e)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "O CPF deve ter 11 caracteres! (" + e.IndexAluno + "º aluno da base, CPF informado: " + e.CPF + ")");
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Format(MessagesResource.CPFInvalido, e.IndexAluno, e.CPF));
                 }
                 catch (NomeNaoInformadoException e)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Nome não informado! (" + e.IndexAluno + "º aluno da base, CPF informado: " + e.CPF + ")");
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Format(MessagesResource.NomeNaoInformado, e.IndexAluno, e.CPF));
                 }
                 catch (EnderecoNaoInformadoException e)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Endereço não informado! (" + e.IndexAluno + "º aluno da base, CPF informado: " + e.CPF + ")");
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Format(MessagesResource.EnderecoNaoInformado, e.IndexAluno, e.CPF));
                 }
                 catch (InvalidOperationException e)
                 {

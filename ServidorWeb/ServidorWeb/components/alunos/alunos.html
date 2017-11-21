@@ -36,43 +36,54 @@
 
 <hr>
 
-<table class="table table-sm table-striped table-hover">
-	<thead>
-		<tr>
-			<th>CPF</th>
-			<th>Nome do Aluno</th>
-			<th>Data de Nascimento</th>
-			<th>Endereço</th>
-			<th>Nome da Mãe</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="a in ct.alunos" ng-click="ct.confirmaExclusao(a)" data-toggle="modal" data-target="#confirma-exclusao">
-			<td>{{a.CPFAluno}}</td>
-			<td>{{a.NomeAluno}}</td>
-			<td>{{a.DataNascimento | date:'dd/MM/yyyy'}}</td>
-			<td>{{a.Endereco}}</td>
-			<td>{{a.NomeMae}}</td>
-		</tr>
-	</tbody>
-</table>
-
-
-<!-- Modal -->
-<div class="modal fade" id="confirma-exclusao" tabindex="-1" role="dialog" aria-labelledby="confirmacao-title" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="confirmacao-title">Confirmação</h5>
-      </div>
-      <div class="modal-body">
-        Tem certeza que deseja excluir o aluno <strong>{{ct.alunoSelecionado.NomeAluno}}</strong>?<br>
-        Essa açao não pode ser desfeita.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="ct.excluirAluno(ct.alunoSelecionado.CPFAluno)">Sim</button>
-      </div>
+<div class="form-row">
+    <div class="form-group col-md-6 col-sm-12">
+        <label for="filtro">Filtro</label>
+        <input type="text" name="filtro" placeholder="Digite uma expressão para filtrar" ng-model="ct.filtro" ng-model-options="{debounce: 500}" class="form-control form-control-sm" />
     </div>
-  </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-sm table-striped table-hover table-responsive-md">
+            <thead>
+                <tr>
+                    <th>CPF</th>
+                    <th>Nome do Aluno</th>
+                    <th>Data de Nascimento</th>
+                    <th>Endereço</th>
+                    <th>Nome da Mãe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="a in ct.alunos | filter:ct.filtro" ng-click="ct.confirmaExclusao(a)" data-toggle="modal" data-target="#confirma-exclusao">
+                    <td>{{a.CPFAluno}}</td>
+                    <td>{{a.NomeAluno}}</td>
+                    <td>{{a.DataNascimento | date:'dd/MM/yyyy'}}</td>
+                    <td>{{a.Endereco}}</td>
+                    <td>{{a.NomeMae}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirma-exclusao" tabindex="-1" role="dialog" aria-labelledby="confirmacao-title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="confirmacao-title">Confirmação</h5>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja excluir o aluno <strong>{{ct.alunoSelecionado.NomeAluno}}</strong>?<br>
+                    Essa açao não pode ser desfeita.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="ct.excluirAluno(ct.alunoSelecionado.CPFAluno)">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>

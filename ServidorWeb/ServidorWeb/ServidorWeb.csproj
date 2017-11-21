@@ -23,6 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,18 +66,24 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="components\alunos\alunos.html" />
+    <Content Include="components\alunos\alunosCtrl.js" />
+    <Content Include="components\cabecalho\cabecalho.html" />
+    <Content Include="components\container\container.html" />
+    <Content Include="components\container\containerCtrl.js" />
+    <Content Include="components\home\home.html" />
+    <Content Include="components\importacoes\importacao.html" />
+    <Content Include="components\importacoes\importacaoCtrl.js" />
     <Content Include="css\styles.css" />
     <Content Include="favicon.ico" />
+    <Content Include="img\school.png" />
+    <Content Include="index.html" />
     <Content Include="js\app.js" />
-    <Content Include="js\config\interceptorConfig.js" />
     <Content Include="js\config\routeConfig.js" />
-    <Content Include="js\controllers\importacaoCtrl.js" />
-    <Content Include="js\controllers\listagemCtrl.js" />
-    <Content Include="js\interceptors\errorInterceptor.js" />
     <Content Include="js\services\alunosAPI.js" />
+    <Content Include="js\services\downloadService.js" />
     <Content Include="js\services\importacoesAPI.js" />
-    <Content Include="js\services\messagesService.js" />
-    <Content Include="js\services\uploadFileService.js" />
+    <Content Include="js\services\menuService.js" />
     <Content Include="js\values\configValue.js" />
     <Content Include="lib\loader.css\loaders.css" />
     <Content Include="lib\loader.css\loaders.css.js" />
@@ -90,17 +97,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
-    <Content Include="views\cabecalho.html" />
-    <Content Include="views\container.html" />
-    <Content Include="views\importacao.html" />
-    <Content Include="views\listagem.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="js\controllers\" />
+    <Folder Include="js\interceptors\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

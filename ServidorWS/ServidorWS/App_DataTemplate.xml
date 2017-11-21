@@ -18,7 +18,7 @@
 		<NomeAluno>João Henrique</NomeAluno>
 		<DataNascimento>1998-04-18</DataNascimento>
 		<NomeMae>Maria Antônia</NomeMae>
-		<Endereco>Rua 3, nº 333, Bairro C, Araguari - MG</Endereco>
+		<Endereco></Endereco>
 	</Aluno>
 	<Aluno>
 		<CPFAluno>44444444444</CPFAluno>
