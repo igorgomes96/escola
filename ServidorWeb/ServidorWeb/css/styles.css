@@ -70,3 +70,7 @@ h4.modal-title {
 .title {
     margin-bottom: 15px;
 }
+
+label {
+    margin-bottom: .2rem;
+}

@@ -7,6 +7,10 @@ angular.module('escolaApp').service('alunosAPI', ['$http', 'config', function($h
         return $http.get(config.baseUrl + resource);
     }
 
+    self.postAluno = function(aluno) {
+    	return $http.post(config.baseUrl + resource, aluno);
+    }
+
     self.deleteAluno = function(cpf) {
         return $http.delete(config.baseUrl + resource + '/' + cpf);
     }

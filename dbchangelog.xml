@@ -11,14 +11,14 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 			<column name="CPFAluno" type="varchar(11)">
 				<constraints primaryKey="true" nullable="false"/>
 			</column>
-			<column name="NomeAluno" type="varchar(60)">
+			<column name="NomeAluno" type="varchar(80)">
 				<constraints nullable="false"/>
 			</column>
 			<column name="DataNascimento" type="date">
 				<constraints nullable="false"/>
 			</column>
-			<column name="NomeMae" type="varchar(60)"/>
-			<column name="Endereco" type="varchar(100)">
+			<column name="NomeMae" type="varchar(80)"/>
+			<column name="Endereco" type="varchar(180)">
 				<constraints nullable="false"/>
 			</column>
 		</createTable>
@@ -35,6 +35,7 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 			<column name="NomeArquivo" type="varchar(100)">
 				<constraints nullable="false"/>
 			</column>
+			<column name="Arquivo" type="varbinary(max)"/>
 		</createTable>
 	</changeSet>
 

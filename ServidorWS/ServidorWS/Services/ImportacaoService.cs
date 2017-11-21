@@ -41,20 +41,25 @@ namespace ServidorWS.Services
             return _importacaoMapper.Map(_importacaoRepositoy.Delete(codigo));
         }
 
+        public Importacao Find(int codigo)
+        {
+            return _importacaoRepositoy.Find(codigo);
+        }
+
         /// <summary>
         /// Lê o arquivo XML, faz o parse, salva os dados lidos, e retorna a lista de alunos salvos.
         /// </summary>
-        /// <param name="fileName">Path do arquivo XML</param>
+        /// <param name="path">Path do arquivo XML</param>
         /// <returns>Lista de alunos importados</returns>
         /// <exception cref="CPFNaoInformadoException">CPF do aluno não informado.</exception>
         /// <exception cref="CPFFormatoIncorretoException">CPF fora do padrão (Formato Inválido)</exception>
         /// <exception cref="NomeNaoInformadoException">Nome do aluno não informado.</exception>
         /// <exception cref="EnderecoNaoInformadoException">Endereço do aluno não informado.</exception>
         /// <exception cref="InvalidOperationException">Erro ao ler o arquivo.</exception>
-        public ICollection<Aluno> Importar(string fileName)
+        public ICollection<Aluno> Importar(string path, string nomeArquivo)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(AlunoListXML));
-            FileStream fileStream = new FileStream(fileName, FileMode.Open);
+            FileStream fileStream = new FileStream(path, FileMode.Open);
             AlunoListXML alunosList;
 
             //Tenta ler o arquivo e salvar. Qualquer exceção, fecha o arquivo e lança a exceção.
@@ -72,12 +77,12 @@ namespace ServidorWS.Services
                 Importacao imp = new Importacao
                 {
                     DataHora = DateTime.Now,
-                    NomeArquivo = fileName.Replace("\"", ""),
-                    Arquivo = File.ReadAllBytes(fileName) //Lê os bytes do arquivo e salva, para possibilitar posterior download
+                    NomeArquivo = nomeArquivo,
+                    Arquivo = File.ReadAllBytes(path) //Lê os bytes do arquivo e salva, para possibilitar posterior download
                 };
                 _importacaoRepositoy.Save(imp);
 
-                File.Delete(fileName);
+                File.Delete(path);
             }
 
         }

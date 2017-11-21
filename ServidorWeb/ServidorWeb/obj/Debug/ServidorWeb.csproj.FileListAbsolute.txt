@@ -66,3 +66,4 @@ C:\Users\igorg\Documents\GitHub\escola\ServidorWeb\ServidorWeb\bin\Microsoft.Cod
 C:\Users\igorg\Documents\GitHub\escola\ServidorWeb\ServidorWeb\obj\Debug\ServidorWeb.csprojResolveAssemblyReference.cache
 C:\Users\igorg\Documents\GitHub\escola\ServidorWeb\ServidorWeb\obj\Debug\ServidorWeb.dll
 C:\Users\igorg\Documents\GitHub\escola\ServidorWeb\ServidorWeb\obj\Debug\ServidorWeb.pdb
+C:\Users\igorg\Documents\GitHub\escola\ServidorWeb\ServidorWeb\obj\Debug\ServidorWeb.csproj.CoreCompileInputs.cache

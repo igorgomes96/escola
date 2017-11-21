@@ -1,4 +1,4 @@
-angular.module('escolaApp', ['ui.router']);
+angular.module('escolaApp', ['ui.router', 'ng-download-file']);
 
 $(document).ready(function() {
 

@@ -75,7 +75,7 @@ namespace ServidorWS.Controllers
                 try
                 {
                     //Importa o arquivo
-                    alunos = _importacaoService.Importar(file.LocalFileName);
+                    alunos = _importacaoService.Importar(file.LocalFileName, provider.FormData["nomeArquivo"]);
                 }
                 catch (CPFNaoInformadoException e)
                 {
@@ -103,6 +103,45 @@ namespace ServidorWS.Controllers
                 }
             }
             return Request.CreateResponse(HttpStatusCode.OK, alunos);
+        }
+
+        [HttpGet]
+        [Route("api/Importacoes/{codigo}/Download")]
+        public HttpResponseMessage DonwloadImportacao(int codigo)
+        {
+            HttpResponseMessage result = null;
+
+            try { 
+                Importacao imp = _importacaoService.Find(codigo);
+                if (imp == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+                var localFilePath = HttpContext.Current.Server.MapPath("~/App_Data") + imp.NomeArquivo;
+                byte[] arq = imp.Arquivo.ToArray();
+
+                File.WriteAllBytes(localFilePath, arq);
+
+                // Serve the file to the client
+                result = Request.CreateResponse(HttpStatusCode.OK);
+                result.Content = new StreamContent(new FileStream(localFilePath, FileMode.Open, FileAccess.Read));
+                result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = imp.NomeArquivo
+                };
+                result.Content.Headers.Add("Access-Control-Expose-Headers", "x-filename"); //Sem ele, o header 'x-filename' não aparece
+                result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/xml");
+                result.Content.Headers.Add("x-filename", imp.NomeArquivo);
+
+                return result;
+            } catch (EntidadeNaoEncontradaException<int, Importacao> e)
+            {
+                result = Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
+                return result;
+            } catch (Exception e)
+            {
+                result = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return result;
+            }
+
         }
 
 

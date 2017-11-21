@@ -43,9 +43,9 @@
                 <tr ng-repeat="i in ct.importacoes">
                     <td>{{i.Id}}</td>
                     <td>{{i.NomeArquivo}}</td>
-                    <td>{{i.DataHora | date:'dd/MM/yy HH:mm'}}</td>
+                    <td>{{i.DataHora | date:'dd/MMM/yy HH:mm'}}</td>
                     <td class="text-right">
-                        <button class="btn btn-primary btn-xs"><i class="fa fa-download"></i></button>
+                        <button class="btn btn-primary btn-xs" ng-click="ct.downloadFile(i.Id)"><i class="fa fa-download"></i></button>
                         <button class="btn btn-danger btn-xs" ng-click="ct.deleteImportacao(i.Id)"><i class="fa fa-trash-o"></i></button>
                     </td>
                 </tr>

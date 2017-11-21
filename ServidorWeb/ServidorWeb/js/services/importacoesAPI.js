@@ -30,4 +30,8 @@ angular.module('escolaApp').service('importacoesAPI', ['$http', 'config', functi
     	return $http.delete(config.baseUrl + resource + '/' + codigo);
     }
 
+    self.downloadImportacao = function(codigo) {
+    	return $http.get(config.baseUrl + resource + '/' + codigo + '/Download');
+    }
+
 }]);

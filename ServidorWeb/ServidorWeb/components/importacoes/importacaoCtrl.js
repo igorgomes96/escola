@@ -1,16 +1,25 @@
-angular.module('escolaApp').controller('importacaoCtrl', ['$rootScope', 'uploadFileService', 'importacoesAPI', 'menuService', function($rootScope, uploadFileService, importacoesAPI, menuService) {
+angular.module('escolaApp').controller('importacaoCtrl', ['$rootScope', 'importacoesAPI', 'menuService', 'downloadService', function($rootScope, importacoesAPI, menuService, downloadService) {
 
 	var self = this;
 	self.importacoes = [];
 
 	menuService.menuPrincipal.selecionar('Importação');
 
+	var getFormData = function() {
+
+		var form = new FormData();
+		form.append("arquivo", $('input[type=file]')[0].files[0]);
+		form.append("nomeArquivo", $('input[type=file]')[0].files[0].name);
+		return form;
+
+	}
+
 	self.sendFile = function() {
 		
 		exibeLoader();
 
 		//Chamada do Service que faz o upload de arquivos.
-		uploadFileService.sendFile()
+		importacoesAPI.uploadFile(getFormData())
 		.done(function (response) {
 
 			//Limpa o valor do input file 
@@ -75,7 +84,10 @@ angular.module('escolaApp').controller('importacaoCtrl', ['$rootScope', 'uploadF
 		    	
 		  	}
 		});
-		
+	}
+
+	self.downloadFile = function(codigo) {
+		downloadService.download(importacoesAPI.downloadImportacao, codigo);
 	}
 
 	loadImportacoes();
